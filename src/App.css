@@ -2,24 +2,22 @@
     text-align: center;
     font-family: Candara, Tahoma, Verdana, sans-serif; 
     font-size: 18;
-    
-    
-    
 }
+
 body {
     text-align: center;
     background-color: rgb(255,255,255);
     /* flex: 1; */
     /* resizeMode: 'cover'; */
-    /* background-repeat: no-repeat; */
-    /* background-image: url("/sc-web-bar.jpg"); */
+    background-repeat: no-repeat;
+    background-image: url("/sc-web-bar.jpg");
 }
 
-backgroundImage: {
-    flex: 1;
-    width: null;
-    height: null;
-}
+/* backgroundImage: { */
+/*     flex: 1; */
+/*     width: null; */
+/*     height: null; */
+/* } */
 
 .pList{
     text-align: center;
@@ -30,7 +28,7 @@ backgroundImage: {
 .piano-div {
     margin-top: 110px;
     text-align: center;
-    width: 500px;
+    /* width: 500px; */
     display: inline-block;
 }
 

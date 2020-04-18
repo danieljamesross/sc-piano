@@ -1,5 +1,5 @@
 import React from 'react';
-import { ImageBackground, StyleSheet, Text, View } from "react-native";
+//import { ImageBackground, StyleSheet, Text, View } from "react-native";
 import _ from 'lodash';
 //import { BasicPiano, ResponsivePiano } from './SomePianos.js';
 
@@ -17,10 +17,12 @@ import PianoWithRecording from './PianoWithRecording';
 const audioContext = new (window.AudioContext || window.webkitAudioContext)();
 const soundfontHostname = 'https://d1pzp51pvbm36p.cloudfront.net';
 
-const noteRange = {
+
+var noteRange = {
     first: MidiNumbers.fromNote('c3'),
     last: MidiNumbers.fromNote('f4'),
 };
+
 const keyboardShortcuts = KeyboardShortcuts.create({
     firstNote: noteRange.first,
     lastNote: noteRange.last,
@@ -121,7 +123,11 @@ class App extends React.Component {
 
    
     onClickMinusOctave = () => {
+	noteRange.first = noteRange.first - 12;
+    };
 
+    onClickPlusOctave = () => {
+	noteRange.last = noteRange.last + 12;
     };
     
 
@@ -175,12 +181,12 @@ class App extends React.Component {
 		    </div>
 		</div>
 		<div className="mt-5">
-		    <button onClick={this.onClickMinusOctave}>- Octave</button>
+		    <button onClick={this.onClickMinusOctave}>- 8ve</button>
 		    <button onClick={this.onClickPlay}>Play</button>
 		    <button onClick={this.onClickStop}>Stop</button>
 		    <button onClick={this.onClickClear}>Clear</button>
 		    <button onClick={this.onClickCopy(pitches)}>Copy</button>
-		    <button onClick={this.onClickMinusOctave}>- Octave</button>
+		    <button onClick={this.onClickPlusOctave}>+ 8ve</button>
 		    
 		</div>
 		<div className="mt-5">
