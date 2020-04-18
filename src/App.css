@@ -1,38 +1,95 @@
 .App {
-  text-align: center;
+    text-align: center;
+    font-family: Candara, Tahoma, Verdana, sans-serif; 
+    font-size: 18;
+    
+    
+    
+}
+body {
+    text-align: center;
+    background-color: rgb(255,255,255);
+    /* flex: 1; */
+    /* resizeMode: 'cover'; */
+    /* background-repeat: no-repeat; */
+    /* background-image: url("/sc-web-bar.jpg"); */
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+backgroundImage: {
+    flex: 1;
+    width: null;
+    height: null;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+.pList{
+    text-align: center;
+    font-size:16pt;
+    display: inline-block;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+.piano-div {
+    margin-top: 110px;
+    text-align: center;
+    width: 500px;
+    display: inline-block;
 }
 
-.App-link {
-  color: #61dafb;
+.titles {
+    margin-top: 80px;
+    text-align: center;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+code {
+    font-family: Courier, Monaco;
+    /*    background: rgb(153,153,153); */
+    background: rgb(235,235,100);
+    /* color: rgb(255,255,255); */
+    color: rgb(0,0,0);
+    white-space: pre;
+    font-size: 80%;
+}
+
+
+/* PianoDarkTheme */
+
+.PianoDarkTheme .ReactPiano__Key--accidental {
+  background: #025d7d;
+  border: 1px solid #888;
+}
+.PianoDarkTheme .ReactPiano__Key--natural {
+  background: #013243;
+  border: 1px solid #888;
+  margin-right: 0;
+}
+.PianoDarkTheme .ReactPiano__Key--active.ReactPiano__Key--accidental {
+  background: #0396ca;
+}
+.PianoDarkTheme .ReactPiano__Key--active.ReactPiano__Key--natural {
+  background: #0396ca;
+}
+/* PianoSCTheme */
+
+.PianoSCTheme .ReactPiano__Key--accidental {
+}
+.PianoSCTheme .ReactPiano__Key--natural {
+  margin-right: 0;
+}
+.PianoSCTheme .ReactPiano__Key--active.ReactPiano__Key--accidental {
+  background: #fed800;
+}
+.PianoSCTheme .ReactPiano__Key--active.ReactPiano__Key--natural {
+  background: #fed800;
+}
+
+
+.ReactPiano__NoteLabel--accidental.ReactPiano__NoteLabel--active {
+  color: #2566b6;
+}
+
+.ReactPiano__NoteLabel--natural {
+  /* color: #2566b6; */
+}
+
+.ReactPiano__NoteLabel--natural.ReactPiano__NoteLabel--active {
+  color: #2566b6;
 }
