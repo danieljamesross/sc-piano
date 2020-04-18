@@ -17,10 +17,9 @@ import PianoWithRecording from './PianoWithRecording';
 const audioContext = new (window.AudioContext || window.webkitAudioContext)();
 const soundfontHostname = 'https://d1pzp51pvbm36p.cloudfront.net';
 
-
-var noteRange = {
-    first: MidiNumbers.fromNote('c3'),
-    last: MidiNumbers.fromNote('f4'),
+const noteRange = {
+    first: MidiNumbers.fromNote('c4'),
+    last: MidiNumbers.fromNote('f5'),
 };
 
 const keyboardShortcuts = KeyboardShortcuts.create({
@@ -31,6 +30,7 @@ const keyboardShortcuts = KeyboardShortcuts.create({
 
 var e;
 var pitches = "Empty";
+var pianoWidth = 500;
 
 
 class App extends React.Component {
@@ -42,6 +42,8 @@ class App extends React.Component {
 	    currentTime: 0,
 	    currentEvents: [],
 	},
+	noteRange: noteRange,
+	width: pianoWidth,
     };
 
     constructor(props) {
@@ -123,11 +125,19 @@ class App extends React.Component {
 
    
     onClickMinusOctave = () => {
-	noteRange.first = noteRange.first - 12;
+	if (noteRange.first - 12 >= 12) {
+	    noteRange.first = noteRange.first - 12;
+	    pianoWidth = pianoWidth + 50;
+	    this.setState({noteRange: noteRange, width: pianoWidth});
+	}
     };
 
     onClickPlusOctave = () => {
-	noteRange.last = noteRange.last + 12;
+	if (noteRange.last + 12 <= 127) {
+	    noteRange.last = noteRange.last + 12;
+	    pianoWidth = pianoWidth + 50;
+	    this.setState({noteRange: noteRange, width: pianoWidth});
+	}
     };
     
 
@@ -154,27 +164,29 @@ class App extends React.Component {
 		    <h2 className="h3"><em>slippery chicken</em></h2>
 		    <h1 className="h3">Pitch Seq Generator</h1>
 		</div>
-		<div className="piano-div">
+		<div className="piano-div" style={{width: this.state.width}}>
 		    <div className="mt-5">
 			<DimensionsProvider>
 			    {({ containerWidth, containerHeight }) => (
 				<SoundfontProvider
-				    instrumentName="acoustic_grand_piano"
-				    audioContext={audioContext}
-				    hostname={soundfontHostname}
-				    render={({ isLoading, playNote, stopNote }) => (
-					<PianoWithRecording
+				instrumentName="acoustic_grand_piano"
+				audioContext={audioContext}
+				hostname={soundfontHostname}
+				render={({ isLoading, playNote, stopNote }) => (
+				    <PianoWithRecording
 					className="PianoSCTheme"
 						   recording={this.state.recording}
 						   setRecording={this.setRecording}
-						   noteRange={noteRange}
-						   width={containerWidth}
+						   noteRange={this.state.noteRange}
+						   width={this.state.width}
+						   height={containerHeight}
 						   playNote={playNote}
 						   stopNote={stopNote}
 						   disabled={isLoading}
 						   keyboardShortcuts={keyboardShortcuts}
-					/>
-				    )}
+				    keyWidthToHeight={0.25}
+				    />
+				)}
 				/>
 			    )}
 			</DimensionsProvider>
