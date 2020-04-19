@@ -1,11 +1,11 @@
 import React from 'react';
-//import { ImageBackground, StyleSheet, Text, View } from "react-native";
 import _ from 'lodash';
-//import { BasicPiano, ResponsivePiano } from './SomePianos.js';
 
 import { midiToNoteName } from "@tonaljs/midi";
-//import { CopyToClipboard } from 'react-copy-to-clipboard';
 import { Piano, KeyboardShortcuts, MidiNumbers } from 'react-piano';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 import 'react-piano/dist/styles.css';
 import './App.css';
 
@@ -32,8 +32,10 @@ var e;
 var pitches = "Empty";
 var pianoWidth = 500;
 
-
 class App extends React.Component {
+
+    
+    
     state = {
 	recording: {
 	    mode: 'RECORDING',
@@ -49,6 +51,7 @@ class App extends React.Component {
     constructor(props) {
 	super(props);
 	this.scheduledEvents = [];
+	
     }
 
     getRecordingEndTime = () => {
@@ -66,6 +69,7 @@ class App extends React.Component {
 	});
     };
 
+    
     onClickPlay = () => {
 	this.setRecording({
 	    mode: 'PLAYING',
@@ -114,16 +118,20 @@ class App extends React.Component {
 	});
     };
 
+    notify = () => toast("Copied to clipboard!");
+    
     onClickCopy = str => {
 	const el = document.createElement('textarea');
+	
 	el.value = str;
 	document.body.appendChild(el);
 	el.select();
 	document.execCommand('copy');
 	document.body.removeChild(el);
+	
     };
 
-   
+    
     onClickMinusOctave = () => {
 	if (noteRange.first - 12 >= 12) {
 	    noteRange.first = noteRange.first - 12;
@@ -158,11 +166,12 @@ class App extends React.Component {
 	
 	return (
 	    <div>
+		
 		{/* <ImageBackground source={require('/sc-web-bar.jpg')}
 		    style={styles.backgroundImage} /> */}
 		<div className="titles">
 		    <h2 className="h3"><em>slippery chicken</em></h2>
-		    <h1 className="h3">Pitch Seq Generator</h1>
+		    <h1 className="h3">Pitch List Generator</h1>
 		</div>
 		<div className="piano-div" style={{width: this.state.width}}>
 		    <div className="mt-5">
@@ -174,17 +183,17 @@ class App extends React.Component {
 				hostname={soundfontHostname}
 				render={({ isLoading, playNote, stopNote }) => (
 				    <PianoWithRecording
-					className="PianoSCTheme"
-						   recording={this.state.recording}
-						   setRecording={this.setRecording}
-						   noteRange={this.state.noteRange}
-						   width={this.state.width}
-						   height={containerHeight}
-						   playNote={playNote}
-						   stopNote={stopNote}
-						   disabled={isLoading}
-						   keyboardShortcuts={keyboardShortcuts}
-				    keyWidthToHeight={0.25}
+				    className="PianoSCTheme"
+					       recording={this.state.recording}
+					       setRecording={this.setRecording}
+					       noteRange={this.state.noteRange}
+					       width={this.state.width}
+					       height={containerHeight}
+					       playNote={playNote}
+					       stopNote={stopNote}
+					       disabled={isLoading}
+					       keyboardShortcuts={keyboardShortcuts}
+					       keyWidthToHeight={0.25}
 				    />
 				)}
 				/>
@@ -194,15 +203,22 @@ class App extends React.Component {
 		</div>
 		<div className="mt-5">
 		    <button onClick={this.onClickMinusOctave}>- 8ve</button>
-		    <button onClick={this.onClickPlay}>Play</button>
-		    <button onClick={this.onClickStop}>Stop</button>
-		    <button onClick={this.onClickClear}>Clear</button>
-		    <button onClick={this.onClickCopy(pitches)}>Copy</button>
 		    <button onClick={this.onClickPlusOctave}>+ 8ve</button>
-		    
 		</div>
 		<div className="mt-5">
-		    <h2 className="h3">Pitch List</h2>
+		    <button onClick={this.onClickPlay}>Play</button>
+		    <button onClick={this.onClickStop}>Stop</button>
+		</div>
+		<div className="mt-5">
+
+
+		    <button onClick={this.onClickClear}>Clear</button>
+		    <button onClick={() => { this.onClickCopy(pitches); this.notify();}}>Copy</button>
+		    <ToastContainer autoClose={2000}/>
+
+		</div>
+		<div className="mt-5">
+		    <h2 className="h3">Pitch List:</h2>
 		    <div className="pList">
 			<code>
 			    {getPitchList()}
