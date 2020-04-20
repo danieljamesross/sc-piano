@@ -48,6 +48,26 @@ code {
     font-size: 80%;
 }
 
+button {
+    background-color: #fed800; 
+  border: 1px solid white;
+  color: black;
+  padding: 0.1em 0.5em;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 80%;
+  width: 80px
+
+}
+
+button:hover {
+  background-color: #ffffff; /* Green */
+  color: black;
+  border: 1px solid #fed800;
+}
+
+
 /* PianoSCTheme */
 
 .PianoSCTheme .ReactPiano__Key--accidental {

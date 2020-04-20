@@ -4,7 +4,7 @@ import _ from 'lodash';
 import { midiToNoteName } from "@tonaljs/midi";
 import { Piano, KeyboardShortcuts, MidiNumbers } from 'react-piano';
 import { ToastContainer, toast, cssTransition } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
+import './ToastCopy.css';
 
 import 'react-piano/dist/styles.css';
 import './App.css';
@@ -32,9 +32,11 @@ var e;
 var pitches = "Empty";
 var pianoWidth = 500;
 
-const Bounce = cssTransition({
+const Slide = cssTransition({
+    enter: 'slideIn',
+    exit: 'slideOut',
     // default to 750ms, can be omitted
-    duration: 10,
+    duration: 500,
 });
 
 class App extends React.Component {
@@ -124,8 +126,8 @@ class App extends React.Component {
     };
 
     notify = () => toast("Copied to clipboard!", {
-	transition: Bounce,
-	autoClose: 5000
+	transition: Slide,
+	autoClose: 1500
     });
     
     onClickCopy = str => {
@@ -216,23 +218,19 @@ class App extends React.Component {
 				/>
 			    )}
 			</DimensionsProvider>
-		    </div>
+		</div>
 		</div>
 		<div className="mt-5">
 		    <button onClick={this.onClickMinusOctave}>- 8ve</button>
-		    <button onClick={this.onClickPlusOctave}>+ 8ve</button>
-		</div>
-		<div className="mt-5">
 		    <button onClick={this.onClickPlay}>Play</button>
 		    <button onClick={this.onClickStop}>Stop</button>
-		</div>
-		<div className="mt-5">
-
-
 		    <button onClick={this.onClickClear}>Clear</button>
-		    <button onClick={() => { this.onClickCopy(pitches); this.notify();}}>Copy</button>
-		    <ToastContainer autoClose={2000}/>
-
+		    <button onClick={() => { this.onClickCopy(pitches);
+			    this.notify();}}>
+			Copy</button>
+		    
+		    <button onClick={this.onClickPlusOctave}>+ 8ve</button>
+		    <ToastContainer  />
 		</div>
 		<div className="mt-5">
 		    <h2 className="h3">Pitch List:</h2>
@@ -243,7 +241,7 @@ class App extends React.Component {
 		    </div>
 		</div>
 		
-	    </div>
+		</div>
 	);
     }
 }
