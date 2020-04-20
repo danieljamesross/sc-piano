@@ -3,7 +3,7 @@ import _ from 'lodash';
 
 import { midiToNoteName } from "@tonaljs/midi";
 import { Piano, KeyboardShortcuts, MidiNumbers } from 'react-piano';
-import { ToastContainer, toast } from 'react-toastify';
+import { ToastContainer, toast, cssTransition } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 import 'react-piano/dist/styles.css';
@@ -31,6 +31,11 @@ const keyboardShortcuts = KeyboardShortcuts.create({
 var e;
 var pitches = "Empty";
 var pianoWidth = 500;
+
+const Bounce = cssTransition({
+    // default to 750ms, can be omitted
+    duration: 10,
+});
 
 class App extends React.Component {
 
@@ -118,7 +123,10 @@ class App extends React.Component {
 	});
     };
 
-    notify = () => toast("Copied to clipboard!");
+    notify = () => toast("Copied to clipboard!", {
+	transition: Bounce,
+	autoClose: 5000
+    });
     
     onClickCopy = str => {
 	const el = document.createElement('textarea');
@@ -133,19 +141,28 @@ class App extends React.Component {
 
     
     onClickMinusOctave = () => {
-	if (noteRange.first - 12 >= 12) {
+	if (noteRange.first - 12 >= 24) {
 	    noteRange.first = noteRange.first - 12;
 	    pianoWidth = pianoWidth + 50;
-	    this.setState({noteRange: noteRange, width: pianoWidth});
 	}
+	if (noteRange.first <= 24 && noteRange.first - 3 >= 20) {
+	    noteRange.first = noteRange.first - 3;
+	    pianoWidth = pianoWidth + 12;
+	}
+	this.setState({noteRange: noteRange, width: pianoWidth});
     };
 
     onClickPlusOctave = () => {
-	if (noteRange.last + 12 <= 127) {
+	if (noteRange.last + 12 <= 110) {
 	    noteRange.last = noteRange.last + 12;
 	    pianoWidth = pianoWidth + 50;
-	    this.setState({noteRange: noteRange, width: pianoWidth});
 	}
+	if (noteRange.last + 7 <= 110) {
+	    noteRange.last = noteRange.last + 7;
+	    pianoWidth = pianoWidth + 26;
+	}
+	this.setState({noteRange: noteRange, width: pianoWidth});
+	
     };
     
 
