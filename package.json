@@ -1,5 +1,6 @@
 {
   "name": "sc-piano",
+  "homepage": "http://www.doc.gold.ac.uk/~dross011",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
@@ -11,6 +12,7 @@
     "child_process": "^1.0.2",
     "exec-sh": "^0.3.4",
     "fibers": "^4.0.2",
+    "firebase-tools": "^8.1.1",
     "midi-note": "^1.0.0",
     "node-sass": "^4.13.1",
     "react": "^16.13.1",

@@ -3,7 +3,11 @@
 
 ![sc piano gif](https://github.com/danieljamesross/sc-piano/blob/master/public/sc-piano.gif)
 
+Interactive version [here](http://www.doc.gold.ac.uk/~dross011/)
+
+
 ### Installation instructions
+
 
 #### Install the Node Package Manager
 
@@ -11,24 +15,30 @@
 
 [Install NPM](https://docs.npmjs.com/downloading-and-installing-node-js-and-npm)
 
+
 #### Install the Yarn Package Manager
 
 ````npm install -g yarn````
 
 [Install Yarn](https://classic.yarnpkg.com/en/docs/install#mac-stable)
 
+
 #### Begin
+
 Clone or Download and then go to the folder:
 
 ````cd ~/sc-piano-master````
+
 
 Install Yarn dependancies:
 
 ````yarn````
 
+
 Start the remote server:
 
 ````yarn start````
+
 
 ---
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).

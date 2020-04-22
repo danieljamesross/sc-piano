@@ -2,7 +2,7 @@ import React from 'react';
 import _ from 'lodash';
 
 import { midiToNoteName } from "@tonaljs/midi";
-import { Piano, KeyboardShortcuts, MidiNumbers } from 'react-piano';
+import { KeyboardShortcuts, MidiNumbers } from 'react-piano';
 import { ToastContainer, toast, cssTransition } from 'react-toastify';
 import './ToastCopy.css';
 
@@ -172,7 +172,7 @@ class App extends React.Component {
 	var getPitchList = () => {
 	    e = this.state.recording.events.map(event => event.midiNumber);
 	    e = e.map(ee => midiToNoteName(ee)).join(" ");
-	    e = "\'(" + e + ")";
+	    e = "'(" + e + ")";
 	    e = e.toLowerCase();
 	    pitches = e;
 	    return (
@@ -180,8 +180,6 @@ class App extends React.Component {
 		    {e}
 		</div>);
 	};
-	
-	
 	
 	return (
 	    <div>
@@ -192,8 +190,8 @@ class App extends React.Component {
 		    <h2 className="h3"><em>slippery chicken</em></h2>
 		    <h1 className="h3">Pitch List Generator</h1>
 		</div>
-		<div className="piano-div" style={{width: this.state.width}}>
-		    <div className="mt-5">
+		<div className="mt-5">
+		    <div className="piano-div" style={{width: this.state.width}}>
 			<DimensionsProvider>
 			    {({ containerWidth, containerHeight }) => (
 				<SoundfontProvider
@@ -202,23 +200,23 @@ class App extends React.Component {
 				hostname={soundfontHostname}
 				render={({ isLoading, playNote, stopNote }) => (
 				    <PianoWithRecording
-				    className="PianoSCTheme"
-					       recording={this.state.recording}
-					       setRecording={this.setRecording}
-					       noteRange={this.state.noteRange}
-					       width={this.state.width}
-					       height={containerHeight}
-					       playNote={playNote}
-					       stopNote={stopNote}
-					       disabled={isLoading}
-					       keyboardShortcuts={keyboardShortcuts}
-					       keyWidthToHeight={0.25}
+					className="PianoSCTheme"
+						   recording={this.state.recording}
+						   setRecording={this.setRecording}
+						   noteRange={this.state.noteRange}
+						   width={this.state.width}
+						   height={containerHeight}
+						   playNote={playNote}
+						   stopNote={stopNote}
+						   disabled={isLoading}
+						   keyboardShortcuts={keyboardShortcuts}
+						   keyWidthToHeight={0.25}
 				    />
 				)}
 				/>
 			    )}
 			</DimensionsProvider>
-		</div>
+		    </div>
 		</div>
 		<div className="mt-5">
 		    <button onClick={this.onClickMinusOctave}>- 8ve</button>
@@ -241,7 +239,7 @@ class App extends React.Component {
 		    </div>
 		</div>
 		
-		</div>
+	    </div>
 	);
     }
 }
